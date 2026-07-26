@@ -584,6 +584,43 @@ console.log("NNNNNNNN");
 }
 loadTrack(0);
 fetchDiscordData();
+  <script>
+// Chặn chuột phải
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+// Chặn kéo thả
+document.addEventListener("dragstart", e => e.preventDefault());
+document.addEventListener("drop", e => e.preventDefault());
+
+// Chặn bôi đen
+document.addEventListener("selectstart", e => e.preventDefault());
+
+// Chặn copy/cut/paste
+["copy","cut","paste"].forEach(event => {
+    document.addEventListener(event, e => e.preventDefault());
+});
+
+// Chặn phím tắt
+document.addEventListener("keydown", function(e) {
+    const key = e.key.toLowerCase();
+
+    if (
+        e.key === "F12" ||                          // F12
+        (e.ctrlKey && key === "u") ||              // Ctrl+U
+        (e.ctrlKey && key === "i") ||              // Ctrl+I
+        (e.ctrlKey && e.shiftKey && key === "i") ||// Ctrl+Shift+I
+        (e.ctrlKey && e.shiftKey && key === "j") ||// Ctrl+Shift+J
+        (e.ctrlKey && key === "s") ||              // Ctrl+S
+        (e.ctrlKey && key === "c") ||              // Ctrl+C
+        (e.ctrlKey && key === "v") ||              // Ctrl+V
+        (e.ctrlKey && key === "x") ||              // Ctrl+X
+        (e.ctrlKey && key === "a")                 // Ctrl+A
+    ) {
+        e.preventDefault();
+        return false;
+    }
+});
+</script>
 </script>
 </body>
 </html>
