@@ -113,6 +113,84 @@ animateTitle();
   });
 })();
 
+/*
+ * Màn hình loading phong cách gaming:
+ * - Thanh loading chạy giả lập (0 -> ~90%) trong lúc chờ video nền (bg.mp4)
+ *   thực sự sẵn sàng để phát (sự kiện "canplaythrough").
+ * - Khi video sẵn sàng, thanh nhảy lên 100%, giữ một nhịp ngắn rồi ẩn màn
+ *   loading và hiện overlay "Click to enter" như cũ (để tuân thủ chính
+ *   sách autoplay có âm thanh của trình duyệt).
+ * - Có timeout dự phòng: nếu video lỗi hoặc tải quá lâu, vẫn tự động cho
+ *   qua sau vài giây để không kẹt người dùng ở màn loading mãi.
+ */
+(function () {
+  const loadingOverlay = document.getElementById('loadingOverlay');
+  const enterOverlay = document.getElementById('enterOverlay');
+  const barFill = document.getElementById('loadingBarFill');
+  const percentEl = document.getElementById('loadingPercent');
+  const bgVideo = document.getElementById('bgVideo');
+  const dotsEl = document.getElementById('loadingDots');
+
+  let fakeProgress = 0;
+  let videoReady = false;
+  let finished = false;
+
+  const dotFrames = ['.', '..', '...'];
+  let dotIndex = 0;
+  const dotsTimer = setInterval(() => {
+    dotIndex = (dotIndex + 1) % dotFrames.length;
+    if (dotsEl) dotsEl.textContent = dotFrames[dotIndex];
+  }, 400);
+
+  function setBar(pct) {
+    const clamped = Math.max(0, Math.min(100, pct));
+    barFill.style.width = clamped + '%';
+    percentEl.textContent = Math.round(clamped) + '%';
+  }
+
+  const progressTimer = setInterval(() => {
+    if (finished) return;
+    // Chạy nhanh lúc đầu, chậm dần khi gần ngưỡng chờ video thật sự sẵn sàng.
+    const ceiling = videoReady ? 100 : 92;
+    const step = videoReady ? 6 : Math.max(0.4, (ceiling - fakeProgress) * 0.08);
+    fakeProgress = Math.min(ceiling, fakeProgress + step);
+    setBar(fakeProgress);
+    if (videoReady && fakeProgress >= 100) finishLoading();
+  }, 90);
+
+  function finishLoading() {
+    if (finished) return;
+    finished = true;
+    clearInterval(progressTimer);
+    clearInterval(dotsTimer);
+    setBar(100);
+    setTimeout(() => {
+      loadingOverlay.classList.add('hidden');
+      enterOverlay.classList.remove('hidden');
+    }, 350);
+  }
+
+  function markVideoReady() {
+    videoReady = true;
+  }
+
+  if (bgVideo) {
+    if (bgVideo.readyState >= 3) {
+      markVideoReady();
+    } else {
+      bgVideo.addEventListener('canplaythrough', markVideoReady, { once: true });
+      bgVideo.addEventListener('error', markVideoReady, { once: true });
+    }
+  } else {
+    markVideoReady();
+  }
+
+  // Dự phòng: đừng để người dùng kẹt ở màn loading quá 6 giây.
+  setTimeout(() => {
+    videoReady = true;
+  }, 6000);
+})();
+
 const avatarUserId = "1102948425126920242";
 const playlist = [
   { title: "Anh Là Ai", src: "nhac1.mp3" },
