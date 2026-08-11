@@ -42,7 +42,6 @@ function animateTitle() {
 }
 animateTitle();
 
-// ---------- Particle background ----------
 (function () {
   const canvas = document.getElementById('particleCanvas');
   const ctx = canvas.getContext('2d');
@@ -86,7 +85,6 @@ animateTitle();
   animateParticles();
 })();
 
-// ---------- 3D tilt on mousemove (desktop only) ----------
 (function () {
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   const bio = document.getElementById('bioContainer');
@@ -113,16 +111,6 @@ animateTitle();
   });
 })();
 
-/*
- * Màn hình loading phong cách gaming:
- * - Thanh loading chạy giả lập (0 -> ~90%) trong lúc chờ video nền (bg.mp4)
- *   thực sự sẵn sàng để phát (sự kiện "canplaythrough").
- * - Khi video sẵn sàng, thanh nhảy lên 100%, giữ một nhịp ngắn rồi ẩn màn
- *   loading và hiện overlay "Click to enter" như cũ (để tuân thủ chính
- *   sách autoplay có âm thanh của trình duyệt).
- * - Có timeout dự phòng: nếu video lỗi hoặc tải quá lâu, vẫn tự động cho
- *   qua sau vài giây để không kẹt người dùng ở màn loading mãi.
- */
 (function () {
   const loadingOverlay = document.getElementById('loadingOverlay');
   const enterOverlay = document.getElementById('enterOverlay');
@@ -150,7 +138,6 @@ animateTitle();
 
   const progressTimer = setInterval(() => {
     if (finished) return;
-    // Chạy nhanh lúc đầu, chậm dần khi gần ngưỡng chờ video thật sự sẵn sàng.
     const ceiling = videoReady ? 100 : 92;
     const step = videoReady ? 6 : Math.max(0.4, (ceiling - fakeProgress) * 0.08);
     fakeProgress = Math.min(ceiling, fakeProgress + step);
@@ -185,7 +172,6 @@ animateTitle();
     markVideoReady();
   }
 
-  // Dự phòng: đừng để người dùng kẹt ở màn loading quá 6 giây.
   setTimeout(() => {
     videoReady = true;
   }, 6000);
@@ -200,26 +186,11 @@ let currentTrack = 0;
 const audio = new Audio();
 let isPlaying = false;
 
-/*
- * FIX lượt xem:
- * - Trước đây, số lượt xem hiển thị mặc định "94" viết cứng trong HTML,
- *   chỉ được cập nhật đúng giá trị SAU KHI người dùng bấm vào overlay
- *   "Click to enter" (vì hàm setupViewsCounter() chỉ được gọi trong
- *   listener của #enterOverlay). Nếu người dùng quay lại nhiều lần,
- *   con số thật lưu trong localStorage đã lớn hơn 94 rất nhiều,
- *   nhưng màn hình vẫn chớp ra "94" trong lúc chờ người dùng click,
- *   gây cảm giác sai số / giật số.
- * - Fix: hiển thị đúng số đã lưu (localStorage) ngay khi trang vừa tải,
- *   độc lập với việc người dùng có bấm overlay hay không. Việc cộng
- *   thêm 1 lượt xem (mỗi phiên/tab tính 1 lần nhờ sessionStorage) cũng
- *   chạy ngay khi tải trang, không cần chờ click nữa.
- */
 function initViewsCounter() {
   const viewsValueEl = document.getElementById('viewsValue');
   if (!viewsValueEl) return;
 
   const baseViews = parseInt(localStorage.getItem('profile_views') || '94', 10) || 94;
-  // Hiển thị ngay số đã lưu, tránh chớp về giá trị viết cứng cũ.
   viewsValueEl.innerText = baseViews;
 
   const alreadyCountedThisSession = sessionStorage.getItem('counted_this_session');
