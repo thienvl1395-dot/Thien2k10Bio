@@ -116,8 +116,15 @@ body {
   max-width: 320px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 16px;
+  align-items: stretch;
+  gap: 14px;
+  padding: 0 6px;
+}
+.loading-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
 }
 .loading-logo {
   width: 56px;
@@ -127,6 +134,7 @@ body {
   object-fit: cover;
   box-shadow: 0 0 18px rgba(139, 92, 246, 0.55), 0 0 34px rgba(34, 211, 238, 0.35);
   animation: loadingPulse 1.4s ease-in-out infinite;
+  align-self: center;
 }
 @keyframes loadingPulse {
   0%, 100% { box-shadow: 0 0 12px rgba(139, 92, 246, 0.45), 0 0 22px rgba(34, 211, 238, 0.25); }
@@ -138,6 +146,8 @@ body {
   letter-spacing: 5px;
   color: var(--text-dim);
   text-transform: uppercase;
+  display: inline-block;
+  transform: skewX(-12deg);
 }
 .loading-title span {
   color: var(--accent-2);
@@ -146,21 +156,36 @@ body {
 .loading-bar-track {
   position: relative;
   width: 100%;
-  height: 10px;
+  height: 14px;
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
   overflow: hidden;
+  transform: skewX(-22deg);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
 }
 .loading-bar-fill {
   position: relative;
   width: 0%;
   height: 100%;
-  border-radius: 6px;
+  border-radius: 0;
   background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-  box-shadow: 0 0 12px rgba(34, 211, 238, 0.75);
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.8), inset 0 0 8px rgba(255, 255, 255, 0.25);
   transition: width 0.25s ease-out;
   overflow: hidden;
+}
+.loading-bar-fill::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.22) 0px,
+    rgba(0, 0, 0, 0.22) 2px,
+    transparent 2px,
+    transparent 10px
+  );
 }
 .loading-bar-fill::after {
   content: "";
@@ -184,7 +209,7 @@ body {
   position: absolute;
   top: 0; left: -30%;
   width: 30%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
   animation: barScan 1.4s ease-in-out infinite;
 }
 @keyframes barScan {
@@ -197,6 +222,8 @@ body {
   letter-spacing: 2px;
   color: var(--text);
   font-variant-numeric: tabular-nums;
+  display: inline-block;
+  transform: skewX(-12deg);
 }
 
 .bio-container {
