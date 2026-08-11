@@ -123,7 +123,7 @@ body {
 .loading-row {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 100%;
 }
 .loading-logo-text {
@@ -138,19 +138,6 @@ body {
 @keyframes loadingPulse {
   0%, 100% { text-shadow: 0 0 10px rgba(139, 92, 246, 0.6), 0 0 20px rgba(34, 211, 238, 0.35); }
   50% { text-shadow: 0 0 18px rgba(139, 92, 246, 0.95), 0 0 34px rgba(34, 211, 238, 0.7); }
-}
-.loading-title {
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 5px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  display: inline-block;
-  transform: skewX(-12deg);
-}
-.loading-title span {
-  color: var(--accent-2);
-  text-shadow: 0 0 10px rgba(34, 211, 238, 0.8);
 }
 .loading-bar-track {
   position: relative;
@@ -225,7 +212,7 @@ body {
   transform: skewX(-12deg);
 }
 .loading-welcome {
-  font-size: 0.75rem;
+  font-size: 0.92rem;
   font-weight: 500;
   letter-spacing: 2px;
   color: var(--text-dim);
