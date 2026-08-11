@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Trang liên kết mạng xã hội cá nhân.">
+<meta name="theme-color" content="#0d0b14">
+<title>Bio Link</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><span></span><span></span></div>
+<video id="bgVideo" class="bg-video" autoplay loop muted playsinline>
+<source src="bg.mp4" type="video/mp4">
+</video>
+<canvas id="particleCanvas"></canvas>
+<div id="enterOverlay">
+<div class="enter-text">[ Click to enter ]</div>
+</div>
+<div class="page-content">
+<div class="datetime-widget" id="datetimeWidget">
+<div class="datetime-day" id="dtDay">Monday</div>
+<div class="datetime-date" id="dtDate">27. JULY, 2026.</div>
+<div class="datetime-time" id="dtTime">09:07 AM</div>
+<hr class="datetime-divider">
+</div>
+<div class="bio-container" id="bioContainer">
+<div class="avatar-box">
+<img id="userAvatar" class="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" onerror="this.onerror=null;this.src='https://cdn.discordapp.com/embed/avatars/0.png';">
+<img id="avatarDecoration" class="avatar-decoration" src="" alt="" style="display: none;" onerror="this.style.display='none';">
+<span class="status-dot offline" id="statusDot"></span>
+</div>
+<h1 class="display-name" id="userName">@thn.wtf</h1>
+<div class="activity-badge" id="activityBadge" style="display: none;">
+<span id="activityIcon">🎮</span>
+<span id="activityText"></span>
+</div>
+<p class="bio-text" id="userBio">Ngủ 💤</p>
+<div class="location-tag">
+<i class="fa-solid fa-location-dot"></i>
+<span>Quảng Ngãi, Việt Nam</span>
+</div>
+<div class="links-container">
+<a href="https://www.facebook.com/thien.huynh.ngoc.197335" target="_blank" rel="noopener noreferrer" class="link-card facebook">
+<div class="link-left">
+<i class="fa-brands fa-facebook"></i>
+<span>Facebook</span>
+</div>
+<i class="fa-solid fa-arrow-up-right-from-square action-icon"></i>
+</a>
+<a href="https://discord.com/users/1523492429125386292" target="_blank" rel="noopener noreferrer" class="link-card discord">
+<div class="link-left">
+<i class="fa-brands fa-discord"></i>
+<span>Discord</span>
+</div>
+<i class="fa-solid fa-arrow-up-right-from-square action-icon"></i>
+</a>
+<a href="https://www.tiktok.com/@thn.wtf" target="_blank" rel="noopener noreferrer" class="link-card tiktok">
+<div class="link-left">
+<i class="fa-brands fa-tiktok"></i>
+<span>TikTok</span>
+</div>
+<i class="fa-solid fa-arrow-up-right-from-square action-icon"></i>
+</a>
+<a href="https://github.com/thienvl1395-dot" target="_blank" rel="noopener noreferrer" class="link-card github">
+<div class="link-left">
+<i class="fa-brands fa-github"></i>
+<span>GitHub</span>
+</div>
+<i class="fa-solid fa-arrow-up-right-from-square action-icon"></i>
+</a>
+</div>
+<div class="views-tag">
+<i class="fa-regular fa-eye"></i>
+<span id="viewsValue"></span>
+</div>
+</div>
+</div>
+<div class="music-player-bar" id="musicPlayerBar">
+<img id="musicThumb" class="song-video-media" src="dislay.png" alt="">
+<div class="player-info">
+<div class="song-title-row">
+<div id="songTitle" class="song-title">Anh Là Ai</div>
+<div class="equalizer">
+<span></span><span></span><span></span><span></span>
+</div>
+</div>
+<div class="timeline-box">
+<span id="currentTime">0:00</span>
+<div class="progress-bar-bg" id="progressBarBg">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+<span id="durationTime">0:00</span>
+</div>
+</div>
+<div class="player-controls">
+<i class="fa-solid fa-step-backward" id="prevBtn" role="button" aria-label="Bài trước" tabindex="0"></i>
+<i class="fa-solid fa-play" id="playBtn" role="button" aria-label="Phát/Tạm dừng" tabindex="0"></i>
+<i class="fa-solid fa-step-forward" id="nextBtn" role="button" aria-label="Bài tiếp" tabindex="0"></i>
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
