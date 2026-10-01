@@ -5,16 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Profile Link - @thn.wtf</title>
   <meta name="description" content="@thn.wtf — developer profile with Discord presence." />
-  <meta name="theme-color" content="#0b0d0e" />
+  <meta name="theme-color" content="#0b0d0e" id="meta-theme" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="@thn.wtf — Developer" />
+  <meta property="og:description" content="Building things for the web. Discord presence, music archive & guestbook." />
+  <meta property="og:image" content="./og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="@thn.wtf — Developer" />
+  <meta name="twitter:description" content="Building things for the web. Discord presence, music archive & guestbook." />
+  <meta name="twitter:image" content="./og.png" />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <script>
+    (function(){try{var t=localStorage.getItem("thn_theme");if(t==="light"){document.documentElement.classList.add("light-boot");}}catch(e){}})();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.discordapp.com" />
+  <link rel="preconnect" href="https://i.ytimg.com" />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/style.css" />
-  <style>.social-icon svg{width:26px;height:26px;flex-shrink:0}</style>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-  <script src="/script.js" defer></script>
+  <link rel="stylesheet" href="./style.css" />
+  <style>.social-icon svg{width:26px;height:26px;flex-shrink:0}html.light-boot body{background-color:#f3f4f6}</style>
+  <script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.min.js" defer></script>
+  <script src="./script.js" defer></script>
 </head>
 <body class="locked">
+  <a class="skip-link" href="#home">Skip to content</a>
   <div class="enter" id="enter" role="button" tabindex="0" aria-label="Click to enter">
     <span class="enter-text">click to enter</span>
   </div>
@@ -29,15 +44,19 @@
 
   <nav class="navbar">
     <div class="navbar-inner">
-      <a class="navbar-logo" href="/home" data-route="home">@thn.wtf</a>
+      <a class="navbar-logo" href="#/home" data-route="home">@thn.wtf</a>
       <ul class="nav-links" id="nav-links">
-        <li><a class="nav-link active" href="/home" data-route="home"><i data-lucide="home"></i>Home</a></li>
-        <li><a class="nav-link" href="/music" data-route="music"><i data-lucide="music"></i>Music</a></li>
+        <li><a class="nav-link active" href="#/home" data-route="home"><i data-lucide="home"></i>Home</a></li>
+        <li><a class="nav-link" href="#/music" data-route="music"><i data-lucide="music"></i>Music</a></li>
+        <li><a class="nav-link" href="#/guestbook" data-route="guestbook"><i data-lucide="book-open"></i>Guestbook</a></li>
       </ul>
-      <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
-        <i data-lucide="menu" class="icon-menu"></i>
-        <i data-lucide="x" class="icon-close"></i>
-      </button>
+      <div class="navbar-actions">
+        <button id="theme-btn" type="button" aria-label="Toggle light / dark theme"><i data-lucide="sun"></i></button>
+        <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <i data-lucide="menu" class="icon-menu"></i>
+          <i data-lucide="x" class="icon-close"></i>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -68,6 +87,7 @@
       <div id="now-line" class="now-line is-loading">
         <span class="skeleton-bar"></span>
       </div>
+      <div id="rpc-slot"></div>
     </section>
 
     <section class="block" id="about">
@@ -144,7 +164,6 @@
         <li class="reveal">CSS</li>
         <li class="reveal">JavaScript</li>
         <li class="reveal">Python</li>
-        <li class="reveal">Git</li>
       </ul>
     </section>
     </div>
@@ -202,8 +221,44 @@
         </div>
       </div>
     </div>
+    <div id="view-guestbook" class="view" hidden>
+      <section class="block" id="guestbook">
+        <div class="stats-divider"></div>
+        <h2 class="stats-header">Guestbook <span class="gb-count" id="gb-count"></span></h2>
+        <div class="capture-box">
+          <span class="capture-text">Leave a message</span>
+        </div>
+        <form class="music-add gb-form" id="gb-form" autocomplete="off">
+          <div class="music-add-row">
+            <input class="music-input" id="gb-name" type="text" placeholder="Your name (optional)" maxlength="40" />
+          </div>
+          <div class="music-add-row" style="margin-top:8px">
+            <textarea class="music-input" id="gb-msg" placeholder="Write something nice…" maxlength="300" required></textarea>
+          </div>
+          <div class="music-add-row" style="margin-top:8px">
+            <button class="music-add-btn" type="submit"><i data-lucide="send"></i><span>Sign</span></button>
+          </div>
+          <p class="music-hint" id="gb-hint">Be kind — messages are public.</p>
+        </form>
+        <div class="gb-list" id="gb-list"></div>
+        <div class="music-empty" id="gb-empty" hidden>
+          <i data-lucide="book-open"></i>
+          <p>No messages yet. Be the first!</p>
+        </div>
+      </section>
+    </div>
   </main>
-  <audio id="bg-audio" src="/nhac1.mp3" loop preload="auto"></audio>
+  <footer class="footer">
+    <span class="footer-sub">@thn.wtf</span>
+  </footer>
+  <div class="music-player-embed" id="yt-embed" hidden>
+    <div class="music-embed-box">
+      <button class="music-embed-close" id="yt-embed-close" type="button" aria-label="Close player"><i data-lucide="x"></i></button>
+      <div class="music-embed-frame"><iframe id="yt-embed-frame" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="YouTube player"></iframe></div>
+      <p class="music-embed-title" id="yt-embed-title"></p>
+    </div>
+  </div>
+  <audio id="bg-audio" src="./nhac1.mp3" loop preload="auto"></audio>
   <button id="bg-music-btn" type="button" aria-label="Toggle music" hidden><i data-lucide="volume-x"></i></button>
 </body>
 </html>
