@@ -1,8 +1,28 @@
 {
   "rewrites": [
-    { "source": "/home", "destination": "/index.html" },
-    { "source": "/home/", "destination": "/index.html" },
-    { "source": "/music", "destination": "/index.html" },
-    { "source": "/music/", "destination": "/index.html" }
+    {
+      "source": "/home",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/home/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/music",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/music/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guestbook",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guestbook/",
+      "destination": "/index.html"
+    }
   ]
 }
