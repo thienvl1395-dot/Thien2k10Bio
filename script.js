@@ -9,8 +9,6 @@ if (window.lucide) {
   });
 }
 
-
-/* ===== Theme toggle (light / dark) ===== */
 (function () {
   var KEY = "thn_theme";
   function current() {
