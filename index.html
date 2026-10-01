@@ -189,6 +189,12 @@
           </div>
           <div id="admin-panel" hidden>
             <p class="music-hint">Admin unlocked. The YouTube add form is now visible in the Music tab.</p>
+            <p class="music-hint">Publish saved links so all visitors can see them: replace music.json in the project with the JSON below, then redeploy.</p>
+            <div class="music-add-row" style="margin-top:8px">
+              <button class="music-add-btn" id="admin-copy-json" type="button"><i data-lucide="copy"></i><span>Copy JSON</span></button>
+              <button class="music-add-btn" id="admin-dl-json" type="button"><i data-lucide="download"></i><span>Download music.json</span></button>
+            </div>
+            <p class="music-hint" id="admin-export-hint"></p>
             <div class="music-admin-foot">
               <button class="music-open" id="admin-lock" type="button"><i data-lucide="lock"></i><span>Lock</span></button>
             </div>
