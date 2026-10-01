@@ -107,7 +107,11 @@ body {
   color: #b3b3b3;
   text-decoration: none;
   border-radius: 6px;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.15s ease, background 0.15s ease;
+}
+
+.nav-link:active {
+  transform: scale(0.94);
 }
 
 .nav-link i {
@@ -1651,6 +1655,26 @@ body.locked {
 .stagger > *:nth-child(7) { transition-delay: 420ms; }
 .stagger > *:nth-child(8) { transition-delay: 490ms; }
 
+.reveal-left,
+.reveal-right {
+  opacity: 0;
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), filter 0.55s ease;
+}
+
+.reveal-left {
+  transform: translateX(-28px);
+}
+
+.reveal-right {
+  transform: translateX(28px);
+}
+
+.reveal-left.in,
+.reveal-right.in {
+  opacity: 1;
+  transform: none;
+}
+
 .social-card:focus-visible {
   outline: 1px solid rgba(255, 255, 255, 0.3);
   outline-offset: 1px;
@@ -1700,11 +1724,16 @@ body.locked {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
   cursor: pointer;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
 }
 
 .menu-btn:hover {
   border-color: rgba(255, 255, 255, 0.2);
+}
+
+.menu-btn:active {
+  transform: scale(0.86);
+  background: #141719;
 }
 
 .menu-btn:focus-visible {
@@ -1727,6 +1756,22 @@ body.locked {
 
 .navbar.open .menu-btn .icon-close {
   display: block;
+  animation: icon-pop 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navbar:not(.open) .menu-btn .icon-menu {
+  animation: icon-pop 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes icon-pop {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1760,6 +1805,29 @@ body.locked {
   .navbar.open .nav-links {
     display: flex;
     animation: menu-in 0.18s ease;
+  }
+
+  .navbar.open .nav-links .nav-link {
+    animation: menu-link-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .navbar.open .nav-links li:nth-child(1) .nav-link {
+    animation-delay: 50ms;
+  }
+
+  .navbar.open .nav-links li:nth-child(2) .nav-link {
+    animation-delay: 120ms;
+  }
+
+  @keyframes menu-link-in {
+    from {
+      opacity: 0;
+      transform: translateX(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 
   @keyframes menu-in {
@@ -2004,6 +2072,36 @@ body {
 
 .view {
   animation: content-fade 0.35s ease both;
+}
+
+.view.view-enter-r {
+  animation: view-in-r 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.view.view-enter-l {
+  animation: view-in-l 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes view-in-r {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes view-in-l {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .music-add {
@@ -2518,4 +2616,29 @@ input, textarea {
 }
 img {
   -webkit-user-drag: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .view-enter-l,
+  .view-enter-r,
+  .navbar.open .nav-links .nav-link,
+  .navbar.open .menu-btn .icon-close,
+  .navbar:not(.open) .menu-btn .icon-menu {
+    animation: none;
+  }
+
+  .reveal-left,
+  .reveal-right {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .menu-btn,
+  .menu-btn:active,
+  .nav-link,
+  .nav-link:active {
+    transform: none;
+    transition: none;
+  }
 }
