@@ -2244,6 +2244,13 @@ body {
   color: #f23f43;
 }
 
+.music-input:disabled, .music-add-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed !important;
+  filter: grayscale(0.6);
+  pointer-events: none;
+}
+
 .music-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
