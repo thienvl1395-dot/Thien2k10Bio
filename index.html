@@ -197,9 +197,8 @@
       <section class="block" id="guestbook">
         <div class="stats-divider"></div>
         <h2 class="stats-header">Guestbook <span class="gb-count" id="gb-count"></span></h2>
-        <div class="capture-box" style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="capture-box">
           <span class="capture-text">Leave a message</span>
-          <button id="gb-admin-trigger" type="button" class="gb-admin-trigger" title="Quản lý tin nhắn"><i data-lucide="shield"></i><span>Admin</span></button>
         </div>
         <div id="gb-admin-bar" class="gb-admin-bar" hidden>
           <span class="gb-admin-badge"><i data-lucide="shield-check"></i> Chế độ quản trị tin nhắn</span>
@@ -253,7 +252,7 @@
         </form>
       </div>
       <div id="admin-panel" hidden>
-        <p class="music-hint">Đã mở khóa quản trị.</p>
+        <p class="music-hint">Đã mở khóa quản trị. Có thể thêm/sửa/xóa nhạc và quản lý tin nhắn Guestbook.</p>
         <p class="music-hint" style="margin-top:10px; font-weight:600; color:var(--text);"><i data-lucide="music" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px;"></i>Music Archive</p>
         <div class="music-add-row" style="margin-top:6px">
           <button class="music-add-btn" id="admin-copy-json" type="button"><i data-lucide="copy"></i><span>Copy JSON</span></button>
@@ -265,6 +264,7 @@
         <div class="music-add-row" style="margin-top:6px">
           <button class="music-add-btn" id="admin-gb-clear" type="button" style="border-color:rgba(239,68,68,0.3); color:#ef4444;"><i data-lucide="trash-2"></i><span>Xóa tất cả tin nhắn Guestbook</span></button>
         </div>
+        <p class="music-hint" style="margin-top:8px; font-size:0.7rem; color:var(--muted); line-height:1.4;">💡 Lưu ý Supabase: Nếu xóa tin nhắn mà máy chủ chưa mất, vào Supabase SQL Editor chạy: <code>CREATE POLICY "Allow delete" ON guestbook FOR DELETE USING (true);</code></p>
         <div class="music-admin-foot" style="margin-top:14px;">
           <button class="music-open" id="admin-lock" type="button"><i data-lucide="lock"></i><span>Khóa lại</span></button>
         </div>
