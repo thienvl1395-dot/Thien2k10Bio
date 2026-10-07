@@ -2299,28 +2299,7 @@ body {
 }
 
 .music-play {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(11, 13, 14, 0.72);
-  border: 1px solid rgba(var(--line), 0.2);
-  color: var(--text-bright);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  pointer-events: none;
-}
-
-.music-play svg {
-  width: 22px;
-  height: 22px;
-  margin-left: 2px;
+  display: none !important;
 }
 
 .music-meta {
@@ -2924,6 +2903,89 @@ body.light .music-add-btn { border-color: rgba(var(--line), 0.14); }
 
 /* ===== Guestbook ===== */
 .gb-form { margin-top: 14px; }
+.gb-admin-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid rgba(var(--line), 0.12);
+  color: var(--muted);
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.gb-admin-trigger:hover, .gb-admin-trigger.active {
+  color: rgb(var(--fx-acc));
+  border-color: rgba(var(--fx-acc), 0.4);
+  background: rgba(var(--fx-acc), 0.08);
+}
+.gb-admin-trigger svg {
+  width: 12px;
+  height: 12px;
+}
+.gb-admin-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  margin-top: 10px;
+  background: rgba(var(--card-rgb), 0.85);
+  border: 1px dashed rgba(var(--fx-acc), 0.4);
+  border-radius: 8px;
+  font-size: 0.75rem;
+  color: var(--muted-2);
+}
+.gb-admin-bar[hidden] {
+  display: none;
+}
+.gb-admin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: rgb(var(--fx-acc));
+}
+.gb-admin-badge svg {
+  width: 14px;
+  height: 14px;
+}
+.gb-admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.gb-admin-btn-sm {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--field);
+  border: 1px solid rgba(var(--line), 0.1);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+.gb-admin-btn-sm:hover {
+  background: var(--card-hover);
+  border-color: rgba(var(--line), 0.2);
+}
+.gb-admin-btn-sm.danger {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.25);
+}
+.gb-admin-btn-sm.danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #ef4444;
+}
+.gb-admin-btn-sm svg {
+  width: 12px;
+  height: 12px;
+}
 .gb-list {
   display: flex;
   flex-direction: column;
@@ -2939,10 +3001,39 @@ body.light .music-add-btn { border-color: rgba(var(--line), 0.14); }
 }
 .gb-head {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 4px;
+}
+.gb-head-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.gb-del-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 6px;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  background: rgba(239, 68, 68, 0.08);
+  color: #ef4444;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.gb-del-btn:hover {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+}
+.gb-del-btn svg {
+  width: 13px;
+  height: 13px;
 }
 .gb-name {
   font-size: 0.8rem;
